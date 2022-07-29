@@ -1,25 +1,40 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Search } from 'semantic-ui-react';
+import Cr from './Cr';
+import Type from './Type';
+import Subtype from './Subtype';
+import Environment from './Environment';
 
 function Home() {
   const [cr, setCr] = useState('');
+  const [environment, setEnvironment] = useState('');
+  const [type, setType] = useState('');
+  const [subtype, setSubtype] = useState('');
 
-  // useEffect(() => {
-  //   fetch(`/cr/${cr}`)
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data));
-  // }, [cr]);
+  function handleCrChange(e) {
+    setCr(e.target.value);
+  }
+
+  function handleEnvironmentChange(e) {
+    setEnvironment(e.target.value);
+  }
+
+  function handleTypeChange(e) {
+    setType(e.target.value);
+  }
+
+  function handleSubtypeChange(e) {
+    setSubtype(e.target.value);
+  }
 
   return (
     <div>
       <h1>Encounter Generator</h1>
       <h3>Input your parameters here to find the right baddies for the job.</h3>
-      <Search
-        placeholder="Search..."
-        onSearchChange={(e) => setCr(e.target.value)}
-      />
-      <p>CR is {cr}</p>
+      <Cr onCrChange={handleCrChange} />
+      <Environment onEnvironmentChange={handleEnvironmentChange} />
+      <Type onTypeChange={handleTypeChange} />
+      <Subtype onSubtypeChange={handleSubtypeChange} />
     </div>
   );
 }

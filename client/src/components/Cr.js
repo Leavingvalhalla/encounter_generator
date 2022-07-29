@@ -1,14 +1,16 @@
-function cr() {
-  fetch('cr').then((res) =>
-    res.json().then((data) => {
-      let string = '';
-      for (let i = 0; i < data.length; i++) {
-        string += `${i}: '${data[i]['cr']}', `;
-        // console.log(data[i]);
-      }
-      console.log(string);
-    })
-  );
+import { useState } from 'react';
+
+function Cr(onCrChange) {
+  //   fetch('cr').then((res) =>
+  //     res.json().then((data) => {
+  //       let string = '';
+  //       for (let i = 0; i < data.length; i++) {
+  //         string += `${i}: '${data[i]['subtype1']}', `;
+  //         // console.log(data[i]);
+  //       }
+  //       console.log(string);
+  //     })
+  //   );
 
   let crOptions = {
     0: '8',
@@ -52,7 +54,12 @@ function cr() {
     38: '26',
   };
 
-  return <p></p>;
+  return (
+    <div>
+      <label htmlFor="CR">CR</label>
+      <input type="text" onChange={(e) => onCrChange(e)} />
+    </div>
+  );
 }
 
-export default cr;
+export default Cr;

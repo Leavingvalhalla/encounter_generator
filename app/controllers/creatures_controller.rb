@@ -9,7 +9,7 @@ class CreaturesController < ApplicationController
     end
 
     def cr
-        render json: Creature.select('distinct(cr)')
+        render json: Creature.select('distinct(subtype1)')
     end
 
     def environments

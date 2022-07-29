@@ -1,12 +1,6 @@
-function Environment() {
-  fetch('environments').then((res) =>
-    res.json().then((data) => {
-      for (let i = 0; i < data.length; i++) {
-        console.log(`${i}: '${data[i]['environment']}'`);
-      }
-    })
-  );
+import { useState } from 'react';
 
+function Environment(onEnvironmentChange) {
   let environmentOptions = {
     0: 'warm rivers or swamps',
     1: 'null',
@@ -648,7 +642,16 @@ function Environment() {
     637: 'temperate mountains (Arcadia)',
   };
 
-  return;
+  return (
+    <div>
+      <label htmlFor="">Environment</label>
+      <input
+        type="text"
+        name="environment"
+        onChange={(e) => onEnvironmentChange(e)}
+      />
+    </div>
+  );
 }
 
 export default Environment;
