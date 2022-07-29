@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :creatures, only:[:index, :show]
-  get '/cr/:cr', to: 'creatures#cr'
+  get '/cr/', to: 'creatures#cr'
+  get '/environments', to: 'creatures#environments'
 end
 
