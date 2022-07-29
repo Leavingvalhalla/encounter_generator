@@ -9,7 +9,7 @@ class CreaturesController < ApplicationController
     end
 
     def cr
-        render json: Creature.where("cr = ?", params[:cr])
+        render json: Creature.select('distinct(cr)')
     end
 
     def environments

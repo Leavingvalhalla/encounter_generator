@@ -5,11 +5,11 @@ import { Search } from 'semantic-ui-react';
 function Home() {
   const [cr, setCr] = useState('');
 
-  useEffect(() => {
-    fetch(`/cr/${cr}`)
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  }, [cr]);
+  // useEffect(() => {
+  //   fetch(`/cr/${cr}`)
+  //     .then((res) => res.json())
+  //     .then((data) => console.log(data));
+  // }, [cr]);
 
   return (
     <div>
