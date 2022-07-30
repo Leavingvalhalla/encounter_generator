@@ -6,7 +6,8 @@ import Subtype from './Subtype';
 import Environment from './Environment';
 
 function Home() {
-  const [cr, setCr] = useState('');
+  const [crMin, setCrMin] = useState('');
+  const [crMax, setCrMax] = useState('');
   const [environment, setEnvironment] = useState('');
   const [type, setType] = useState('');
   const [subtype, setSubtype] = useState('');
@@ -19,8 +20,12 @@ function Home() {
       .then((data) => setCreatures(data));
   }, []);
 
-  function handleCrChange(e) {
-    setCr(e.target.value);
+  function handleCrMinChange(e) {
+    setCrMin(e.target.value);
+  }
+
+  function handleCrMaxChange(e) {
+    setCrMin(e.target.value);
   }
 
   function handleEnvironmentChange(e) {
@@ -53,9 +58,14 @@ function Home() {
     if (type !== '') {
       query = query.filter((creature) => creature['maintype'] == type);
     }
-    if (cr !== '') {
-      query = query.filter((creature) => creature['cr'] == cr);
+    if (crMin !== '' && crMax === '') {
+      query = query.filter((creature) => creature['cr'] == crMin);
+    } else if (crMin !== '' && crMax !== '') {
+      query = query.filter(
+        (creature) => creature['cr'] >= crMin && creature['cr'] <= crMax
+      );
     }
+
     setResult(query);
   }
 
@@ -63,7 +73,7 @@ function Home() {
     <div>
       <h1>Encounter Generator</h1>
       <h3>Input your parameters here to find the right baddies for the job.</h3>
-      <Cr onCrChange={handleCrChange} />
+      <Cr onCrMinChange={handleCrMinChange} onCrMaxChange={handleCrMaxChange} />
       <Environment onEnvironmentChange={handleEnvironmentChange} />
       <Type onTypeChange={handleTypeChange} />
       <Subtype onSubtypeChange={handleSubtypeChange} />
@@ -71,7 +81,7 @@ function Home() {
         Search
       </button>
       {result.map((creature) => (
-        <p>{creature['name']}</p>
+        <p key={creature['name']}>{creature['name']}</p>
       ))}
     </div>
   );
