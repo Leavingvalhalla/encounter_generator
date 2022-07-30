@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-function Subtype(onSubtypeChange) {
+function Subtype({ onSubtypeChange }) {
   let subtypeOptions = {
     0: 'aquatic',
     1: 'ratfolk',

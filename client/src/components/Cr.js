@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-function Cr(onCrChange) {
+function Cr({ onCrChange }) {
   //   fetch('cr').then((res) =>
   //     res.json().then((data) => {
   //       let string = '';

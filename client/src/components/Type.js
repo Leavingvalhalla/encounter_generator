@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-function Type(onTypeChange) {
+function Type({ onTypeChange }) {
   let typeOptions = {
     0: 'monstrous humanoid',
     1: 'animal',

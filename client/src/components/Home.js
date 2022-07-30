@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import Cr from './Cr';
 import Type from './Type';
 import Subtype from './Subtype';
@@ -10,6 +10,14 @@ function Home() {
   const [environment, setEnvironment] = useState('');
   const [type, setType] = useState('');
   const [subtype, setSubtype] = useState('');
+  const [creatures, setCreatures] = useState([]);
+  const [result, setResult] = useState([]);
+
+  useEffect(() => {
+    fetch('/creatures')
+      .then((res) => res.json())
+      .then((data) => setCreatures(data));
+  }, []);
 
   function handleCrChange(e) {
     setCr(e.target.value);
@@ -27,6 +35,30 @@ function Home() {
     setSubtype(e.target.value);
   }
 
+  function handleSubmit() {
+    let query = creatures;
+    if (environment !== '') {
+      query = query.filter(
+        (creature) => creature['environment'] == environment
+      );
+    }
+    if (subtype !== '') {
+      query = query.filter(
+        (creature) =>
+          creature['subtype1'] == subtype ||
+          creature['subtype2'] == subtype ||
+          creature['subtype3'] == subtype
+      );
+    }
+    if (type !== '') {
+      query = query.filter((creature) => creature['maintype'] == type);
+    }
+    if (cr !== '') {
+      query = query.filter((creature) => creature['cr'] == cr);
+    }
+    setResult(query);
+  }
+
   return (
     <div>
       <h1>Encounter Generator</h1>
@@ -35,6 +67,12 @@ function Home() {
       <Environment onEnvironmentChange={handleEnvironmentChange} />
       <Type onTypeChange={handleTypeChange} />
       <Subtype onSubtypeChange={handleSubtypeChange} />
+      <button type="submit" onClick={handleSubmit}>
+        Search
+      </button>
+      {result.map((creature) => (
+        <p>{creature['name']}</p>
+      ))}
     </div>
   );
 }

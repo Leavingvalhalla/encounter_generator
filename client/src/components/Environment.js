@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-function Environment(onEnvironmentChange) {
+function Environment({ onEnvironmentChange }) {
   let environmentOptions = {
     0: 'warm rivers or swamps',
     1: 'null',
