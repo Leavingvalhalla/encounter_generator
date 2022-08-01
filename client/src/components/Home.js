@@ -22,7 +22,10 @@ function Home() {
   useEffect(() => {
     fetch('/creatures')
       .then((res) => res.json())
-      .then((data) => setCreatures(data));
+      .then((data) => {
+        setCreatures(data);
+        console.log(data[0]);
+      });
   }, []);
 
   function handleSubmit() {
@@ -51,6 +54,7 @@ function Home() {
       );
     }
     setResult(query);
+    console.log(query);
   }
 
   return (
