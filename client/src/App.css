@@ -41,3 +41,10 @@
   display: inline-block;
   margin: 1%;
 }
+
+.autocomplete {
+  display: inline-flex;
+  align-items: center;
+  padding: 1%
+
+}

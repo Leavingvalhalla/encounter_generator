@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { TextField, Autocomplete, Button } from '@mui/material/';
+import { TextField, Autocomplete, Button, Typography } from '@mui/material/';
 import CreatureCard from './CreatureCard.js';
 
 import {
@@ -55,9 +55,16 @@ function Home() {
 
   return (
     <div>
-      <h1>Encounter Generator</h1>
-      <h3>Input your parameters here to find the right baddies for the job.</h3>
+      <Typography variant="h1">Encounter Generator</Typography>
+      <Typography variant="h3">
+        Input your parameters here to find the right baddies for the job.
+      </Typography>
+      <Typography variant="h5">
+        You can leave CR max blank for an exact CR search.
+      </Typography>
+      {/* TODO: Refactor input fields to separate component */}
       <Autocomplete
+        className="autocomplete"
         id="crMin"
         options={crOptions}
         inputValue={crMin}
@@ -66,6 +73,7 @@ function Home() {
         renderInput={(params) => <TextField {...params} label="CR min" />}
       />
       <Autocomplete
+        className="autocomplete"
         id="crMax"
         options={crOptions}
         inputValue={crMax}
@@ -74,6 +82,7 @@ function Home() {
         renderInput={(params) => <TextField {...params} label="CR max" />}
       />{' '}
       <Autocomplete
+        className="autocomplete"
         id="environment"
         options={environmentOptions}
         inputValue={environment}
@@ -82,6 +91,7 @@ function Home() {
         renderInput={(params) => <TextField {...params} label="Environment" />}
       />{' '}
       <Autocomplete
+        className="autocomplete"
         id="type"
         options={typeOptions}
         sx={{ width: 300 }}
@@ -90,6 +100,7 @@ function Home() {
         renderInput={(params) => <TextField {...params} label="Type" />}
       />{' '}
       <Autocomplete
+        className="autocomplete"
         id="subtype"
         options={subtypeOptions}
         inputValue={subtype}
