@@ -1,9 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import Cr from './Cr';
-import Type from './Type';
-import Subtype from './Subtype';
-import Environment from './Environment';
+import { TextField, Autocomplete, Button } from '@mui/material/';
+
+import {
+  crOptions,
+  typeOptions,
+  environmentOptions,
+  subtypeOptions,
+} from '../data.js';
 
 function Home() {
   const [crMin, setCrMin] = useState('');
@@ -20,52 +24,32 @@ function Home() {
       .then((data) => setCreatures(data));
   }, []);
 
-  function handleCrMinChange(e) {
-    setCrMin(e.target.value);
-  }
-
-  function handleCrMaxChange(e) {
-    setCrMin(e.target.value);
-  }
-
-  function handleEnvironmentChange(e) {
-    setEnvironment(e.target.value);
-  }
-
-  function handleTypeChange(e) {
-    setType(e.target.value);
-  }
-
-  function handleSubtypeChange(e) {
-    setSubtype(e.target.value);
-  }
-
   function handleSubmit() {
     let query = creatures;
     if (environment !== '') {
       query = query.filter(
-        (creature) => creature['environment'] == environment
+        (creature) => creature['environment'] === environment
       );
     }
     if (subtype !== '') {
       query = query.filter(
         (creature) =>
-          creature['subtype1'] == subtype ||
-          creature['subtype2'] == subtype ||
-          creature['subtype3'] == subtype
+          creature['subtype1'] === subtype ||
+          creature['subtype2'] === subtype ||
+          creature['subtype3'] === subtype
       );
     }
     if (type !== '') {
-      query = query.filter((creature) => creature['maintype'] == type);
+      query = query.filter((creature) => creature['maintype'] === type);
     }
     if (crMin !== '' && crMax === '') {
-      query = query.filter((creature) => creature['cr'] == crMin);
+      query = query.filter((creature) => creature['cr'] === crMin);
     } else if (crMin !== '' && crMax !== '') {
       query = query.filter(
         (creature) => creature['cr'] >= crMin && creature['cr'] <= crMax
       );
     }
-
+    console.log(crMin);
     setResult(query);
   }
 
@@ -73,13 +57,49 @@ function Home() {
     <div>
       <h1>Encounter Generator</h1>
       <h3>Input your parameters here to find the right baddies for the job.</h3>
-      <Cr onCrMinChange={handleCrMinChange} onCrMaxChange={handleCrMaxChange} />
-      <Environment onEnvironmentChange={handleEnvironmentChange} />
-      <Type onTypeChange={handleTypeChange} />
-      <Subtype onSubtypeChange={handleSubtypeChange} />
-      <button type="submit" onClick={handleSubmit}>
+      <Autocomplete
+        id="crMin"
+        options={crOptions}
+        inputValue={crMin}
+        onInputChange={(event, newValue) => setCrMin(newValue)}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="CR min" />}
+      />
+      <Autocomplete
+        id="crMax"
+        options={crOptions}
+        inputValue={crMax}
+        onInputChange={(event, newValue) => setCrMax(newValue)}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="CR max" />}
+      />{' '}
+      <Autocomplete
+        id="environment"
+        options={environmentOptions}
+        inputValue={environment}
+        onInputChange={(event, newValue) => setEnvironment(newValue)}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="Environment" />}
+      />{' '}
+      <Autocomplete
+        id="type"
+        options={typeOptions}
+        sx={{ width: 300 }}
+        inputValue={type}
+        onInputChange={(event, newValue) => setType(newValue)}
+        renderInput={(params) => <TextField {...params} label="Type" />}
+      />{' '}
+      <Autocomplete
+        id="subtype"
+        options={subtypeOptions}
+        inputValue={subtype}
+        onInputChange={(event, newValue) => setSubtype(newValue)}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="Subtype" />}
+      />
+      <Button variant="contained" onClick={handleSubmit}>
         Search
-      </button>
+      </Button>
       {result.map((creature) => (
         <p key={creature['name']}>{creature['name']}</p>
       ))}
