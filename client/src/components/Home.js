@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { TextField, Autocomplete, Button } from '@mui/material/';
+import CreatureCard from './CreatureCard.js';
 
 import {
   crOptions,
@@ -49,7 +50,6 @@ function Home() {
         (creature) => creature['cr'] >= crMin && creature['cr'] <= crMax
       );
     }
-    console.log(crMin);
     setResult(query);
   }
 
@@ -100,8 +100,9 @@ function Home() {
       <Button variant="contained" onClick={handleSubmit}>
         Search
       </Button>
-      {result.map((creature) => (
-        <p key={creature['name']}>{creature['name']}</p>
+      <br />
+      {result.map((creature, index) => (
+        <CreatureCard creature={creature} key={index} />
       ))}
     </div>
   );
