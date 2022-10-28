@@ -9,6 +9,7 @@ import {
   environmentOptions,
   subtypeOptions,
 } from '../data.js';
+import allCreatures from '../allCreatures.js';
 
 function Home() {
   const [crMin, setCrMin] = useState('');
@@ -19,17 +20,22 @@ function Home() {
   const [creatures, setCreatures] = useState([]);
   const [result, setResult] = useState([]);
 
+  // useEffect(() => {
+  //   fetch('/creatures')
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setCreatures(data);
+  //       console.log(data[0]);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    fetch('/creatures')
-      .then((res) => res.json())
-      .then((data) => {
-        setCreatures(data);
-        console.log(data[0]);
-      });
-  }, []);
+    setCreatures(allCreatures);
+  }, [creatures]);
 
   function handleSubmit() {
     let query = creatures;
+    console.log(typeof query);
     if (environment !== '') {
       query = query.filter(
         (creature) => creature['environment'] === environment
@@ -54,7 +60,7 @@ function Home() {
       );
     }
     setResult(query);
-    console.log(query);
+    // console.log(query);
   }
 
   return (
