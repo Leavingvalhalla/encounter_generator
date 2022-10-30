@@ -1,6 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { TextField, Autocomplete, Button, Typography } from '@mui/material/';
+import {
+  Card,
+  CardContent,
+  TextField,
+  Autocomplete,
+  Button,
+  Typography,
+} from '@mui/material/';
 import CreatureCard from './CreatureCard.js';
 
 import {
