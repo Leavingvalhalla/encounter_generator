@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import {
   Card,
-  CardContent,
   TextField,
   Autocomplete,
   Button,
@@ -27,22 +26,14 @@ function Home() {
   const [creatures, setCreatures] = useState([]);
   const [result, setResult] = useState([]);
 
-  // useEffect(() => {
-  //   fetch('/creatures')
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setCreatures(data);
-  //       console.log(data[0]);
-  //     });
-  // }, []);
-
   useEffect(() => {
     setCreatures(allCreatures);
-  }, [creatures]);
+  }, []);
 
   function handleSubmit() {
     let query = creatures;
-    console.log(typeof query);
+    // filters are ordered to cut out as much as possible
+    // each round, to keep speed up
     if (environment !== '') {
       query = query.filter(
         (creature) => creature['environment'] === environment
@@ -67,21 +58,23 @@ function Home() {
       );
     }
     setResult(query);
-    // console.log(query);
   }
 
   return (
     <div>
-      <Card variant="contained" sx={{ width: '75%' }}>
+      <Card variant="contained" sx={{ width: '75%', margin: 'auto' }}>
         <Typography variant="h1">Encounter Generator</Typography>
-        <CardContent>
-          <Typography variant="h3">
-            Input your parameters here to find the right baddies for the job.
-          </Typography>
-          <Typography variant="h5">
-            You can leave CR max blank for an exact CR search.
-          </Typography>
-        </CardContent>
+      </Card>
+      <Card
+        variant="contained"
+        sx={{ width: '75%', margin: 'auto', padding: '2% 0' }}
+      >
+        <Typography variant="h3">
+          Input your parameters here to find the right baddies for the job.
+        </Typography>
+        <Typography variant="h5">
+          You can leave CR max blank for an exact CR search.
+        </Typography>
       </Card>
       {/* TODO: Refactor input fields to separate component */}
       <Autocomplete
