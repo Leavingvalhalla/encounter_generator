@@ -72,13 +72,17 @@ function Home() {
 
   return (
     <div>
-      <Typography variant="h1">Encounter Generator</Typography>
-      <Typography variant="h3">
-        Input your parameters here to find the right baddies for the job.
-      </Typography>
-      <Typography variant="h5">
-        You can leave CR max blank for an exact CR search.
-      </Typography>
+      <Card variant="contained" sx={{ width: '75%' }}>
+        <Typography variant="h1">Encounter Generator</Typography>
+        <CardContent>
+          <Typography variant="h3">
+            Input your parameters here to find the right baddies for the job.
+          </Typography>
+          <Typography variant="h5">
+            You can leave CR max blank for an exact CR search.
+          </Typography>
+        </CardContent>
+      </Card>
       {/* TODO: Refactor input fields to separate component */}
       <Autocomplete
         className="autocomplete"
