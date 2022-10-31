@@ -15,6 +15,7 @@ function CreatureCard({ creature }) {
   const [saves, setSaves] = useState(false);
   const [weapons, setWeapons] = useState(false);
   const [treasure, setTreasure] = useState(false);
+  const [stats, setStats] = useState(false);
 
   return (
     <Box className="creature-box" sx={{ minWidth: 275 }}>
@@ -49,6 +50,7 @@ function CreatureCard({ creature }) {
             </CardActions>
             {expand && (
               <CardContent>
+                <Typography>HP: {creature.hp}</Typography>
                 <Typography>AC: {creature.ac}</Typography>
                 {creature.touch_ac && (
                   <Typography>Touch AC: {creature.touch_ac}</Typography>
@@ -61,6 +63,19 @@ function CreatureCard({ creature }) {
                 <Typography>Space: {creature.space}</Typography>
                 {creature.reach > 0 && (
                   <Typography>Reach: {creature.reach}</Typography>
+                )}
+                <Button onClick={() => setStats((stats) => !stats)}>
+                  Stats
+                </Button>
+                {stats && (
+                  <CardContent>
+                    <Typography>Str: {creature.str}</Typography>
+                    <Typography>Dex: {creature.dex}</Typography>
+                    <Typography>Con: {creature.con}</Typography>
+                    <Typography>Int: {creature.int}</Typography>
+                    <Typography>Wis: {creature.wis}</Typography>
+                    <Typography>Char: {creature.cha}</Typography>
+                  </CardContent>
                 )}
                 <Button onClick={() => setSkills((skills) => !skills)}>
                   Skills
@@ -91,8 +106,12 @@ function CreatureCard({ creature }) {
                 </Button>
                 {weapons && (
                   <CardContent>
-                    <Typography>{creature.melee}</Typography>
-                    <Typography>{creature.ranged}</Typography>
+                    {creature.melee && (
+                      <Typography>Melee: {creature.melee}</Typography>
+                    )}
+                    {creature.ranged && (
+                      <Typography>Ranged: {creature.ranged}</Typography>
+                    )}
                   </CardContent>
                 )}
                 <Button onClick={() => setTreasure((treasure) => !treasure)}>
