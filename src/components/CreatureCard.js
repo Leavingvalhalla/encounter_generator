@@ -50,12 +50,18 @@ function CreatureCard({ creature }) {
             {expand && (
               <CardContent>
                 <Typography>AC: {creature.ac}</Typography>
-                <Typography>Touch AC: {creature.touch_ac}</Typography>
-                <Typography>
-                  Flat Footed AC: {creature.ac_flat_footed}
-                </Typography>
+                {creature.touch_ac && (
+                  <Typography>Touch AC: {creature.touch_ac}</Typography>
+                )}
+                {creature.ac_flat_footed && (
+                  <Typography>
+                    Flat Footed AC: {creature.ac_flat_footed}
+                  </Typography>
+                )}
                 <Typography>Space: {creature.space}</Typography>
-                <Typography>Reach: {creature.reach}</Typography>
+                {creature.reach > 0 && (
+                  <Typography>Reach: {creature.reach}</Typography>
+                )}
                 <Button onClick={() => setSkills((skills) => !skills)}>
                   Skills
                 </Button>
@@ -73,12 +79,26 @@ function CreatureCard({ creature }) {
                 <Button onClick={() => setSaves((saves) => !saves)}>
                   Saves
                 </Button>
+                {saves && (
+                  <CardContent>
+                    <Typography>Fort: {creature.fort}</Typography>
+                    <Typography>Ref: {creature.ref}</Typography>
+                    <Typography>Will: {creature.will}</Typography>
+                  </CardContent>
+                )}
                 <Button onClick={() => setWeapons((weapons) => !weapons)}>
                   Weapons
                 </Button>
+                {weapons && (
+                  <CardContent>
+                    <Typography>{creature.melee}</Typography>
+                    <Typography>{creature.ranged}</Typography>
+                  </CardContent>
+                )}
                 <Button onClick={() => setTreasure((treasure) => !treasure)}>
                   Treasure
                 </Button>
+                {treasure && <Typography>{creature.treasure}</Typography>}
               </CardContent>
             )}
           </Fragment>
