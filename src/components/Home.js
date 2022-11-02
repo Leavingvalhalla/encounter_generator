@@ -71,7 +71,13 @@ function Home() {
         variant="contained"
         sx={{ width: '75%', margin: 'auto', padding: '2% 0' }}
       >
-        <Typography variant="h3">
+        <Typography
+          sx={{
+            fontFamily: "'IM Fell Great Primer SC', serif",
+            padding: '0 0 2% 0 ',
+          }}
+          variant="h3"
+        >
           Input your parameters here to find the right baddies for the job.
         </Typography>
         <Typography variant="h5">
