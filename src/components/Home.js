@@ -63,7 +63,7 @@ function Home() {
   return (
     <div>
       <Card variant="contained" sx={{ width: '75%', margin: 'auto' }}>
-        <Typography sx={{ fontFamily: '"Exo 2", sans-serif' }} variant="h1">
+        <Typography sx={{ fontFamily: "'Eagle Lake', cursive" }} variant="h1">
           Encounter Generator
         </Typography>
       </Card>
