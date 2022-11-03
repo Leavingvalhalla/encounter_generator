@@ -36,19 +36,22 @@ function Home() {
     // each round, to keep speed up
     if (environment !== '') {
       query = query.filter(
-        (creature) => creature['environment'] === environment
+        (creature) =>
+          creature['environment'].toLowerCase() === environment.toLowerCase()
       );
     }
     if (subtype !== '') {
       query = query.filter(
         (creature) =>
-          creature['subtype1'] === subtype ||
-          creature['subtype2'] === subtype ||
-          creature['subtype3'] === subtype
+          creature['subtype1'].toLowerCase() === subtype.toLowerCase() ||
+          creature['subtype2'].toLowerCase() === subtype.toLowerCase() ||
+          creature['subtype3'].toLowerCase() === subtype.toLowerCase()
       );
     }
     if (type !== '') {
-      query = query.filter((creature) => creature['maintype'] === type);
+      query = query.filter(
+        (creature) => creature['maintype'].toLowerCase() === type.toLowerCase()
+      );
     }
     if (crMin !== '' && crMax === '') {
       query = query.filter((creature) => creature['cr'] === crMin);
