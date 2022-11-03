@@ -37,6 +37,7 @@ function Home() {
     if (environment !== '') {
       query = query.filter(
         (creature) =>
+          creature['environment'] !== null &&
           creature['environment'].toLowerCase() === environment.toLowerCase()
       );
     }
