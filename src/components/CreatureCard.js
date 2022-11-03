@@ -60,7 +60,9 @@ function CreatureCard({ creature }) {
                     Flat Footed AC: {creature.ac_flat_footed}
                   </Typography>
                 )}
-                <Typography>Space: {creature.space}</Typography>
+                {creature.space !== '5' && (
+                  <Typography>Space: {creature.space}</Typography>
+                )}
                 {creature.reach > 0 && (
                   <Typography>Reach: {creature.reach}</Typography>
                 )}
