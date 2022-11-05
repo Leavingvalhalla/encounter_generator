@@ -23,11 +23,7 @@ function CreatureCard({ creature }) {
         {
           <Fragment>
             <CardContent>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.primary"
-                gutterBottom
-              >
+              <Typography sx={{ fontSize: 14 }} color="text.primary">
                 {creature['name']}
               </Typography>
               <Typography variant="h5" component="div"></Typography>
